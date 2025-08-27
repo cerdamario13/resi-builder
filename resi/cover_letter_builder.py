@@ -1,6 +1,6 @@
 from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from llm_generator import cover_letter_generator
+from .open_ai_writer import cover_letter_generator
 from .utils import pdf_utils
 
 

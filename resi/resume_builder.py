@@ -1,7 +1,7 @@
 from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle
 from reportlab.lib import colors
-from open_ai_writer import generate_job_bullets
+from .open_ai_writer import generate_job_bullets
 from .utils import pdf_utils
 import textwrap
 
