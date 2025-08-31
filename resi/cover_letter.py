@@ -24,7 +24,7 @@ def build_cover_letter_preview(metadata: dict, history: dict) -> dict:
     return body
 
 
-def build_cover_letter_final(body, user_history):
+def build_cover_letter_pdf(body, user_history):
     """
     Build the final pdf file
     """

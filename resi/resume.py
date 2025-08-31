@@ -30,7 +30,7 @@ def build_resume_preview(metadata: dict, history: dict) -> dict:
     # Step 3: Return the file for review
     return body
 
-def build_resume_final(body: dict, user_history: dict):
+def build_resume_pdf(body: dict, user_history: dict):
     """
     Build the pdf file
     """
