@@ -15,9 +15,12 @@ def build_cover_letter_preview(metadata: dict, history: dict) -> dict:
     # Step 2: Write it to a temp text file for approval
     paragraphs = body.strip().split("\n\n")
 
+    # Check if hiring manager is filled, if not use generic
+    hiring_manager = metadata.get('hiring_manager', 'Hiring Manager')
+
     # Step 3: return the file for preview
     body = {
-        'intro': f"Dear {metadata['hiring_manager']},",
+        'intro': f"Dear {hiring_manager},",
         'paragraphs': {k:v for k,v in enumerate(paragraphs)},
     }
 
