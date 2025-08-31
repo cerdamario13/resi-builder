@@ -7,7 +7,7 @@ import textwrap
 
 def build_resume_preview(metadata: dict, history: dict) -> dict:
     """
-    Build resume data preview
+    Build resume data preview dictionary.
     """
 
     # Step 1: Generate initial resume content
@@ -32,7 +32,7 @@ def build_resume_preview(metadata: dict, history: dict) -> dict:
 
 def build_resume_pdf(body: dict, user_history: dict):
     """
-    Build the pdf file
+    Build the resume as a pdf file
     """
 
     # Build the PDF

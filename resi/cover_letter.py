@@ -6,7 +6,7 @@ from .utils import pdf_utils
 
 def build_cover_letter_preview(metadata: dict, history: dict) -> dict:
     """
-    Build a Cover Letter preview that is ready for review
+    Build the cover letter data preview dictionary
     """
 
     # Step 1: Generate initial cover letter text
@@ -26,7 +26,7 @@ def build_cover_letter_preview(metadata: dict, history: dict) -> dict:
 
 def build_cover_letter_pdf(body, user_history):
     """
-    Build the final pdf file
+    Build the cover letter as a pdf file.
     """
 
     # Remove any spaces at the end
