@@ -4,19 +4,21 @@ from .open_ai_writer import cover_letter_generator
 from .utils import pdf_utils
 
 
-def build_cover_letter_preview(metadata: dict, history: dict) -> dict:
+def build_cover_letter_preview(job_metadata: dict, user_history: dict) -> dict:
     """
-    Build the cover letter data preview dictionary
+    Build the cover letter data preview dictionary.
+
+    :param job_metadata: 
     """
 
     # Step 1: Generate initial cover letter text
-    body = cover_letter_generator(metadata, history)
+    body = cover_letter_generator(job_metadata, user_history)
 
     # Step 2: Write it to a temp text file for approval
     paragraphs = body.strip().split("\n\n")
 
     # Check if hiring manager is filled, if not use generic
-    hiring_manager = metadata.get('hiring_manager', 'Hiring Manager')
+    hiring_manager = job_metadata.get('hiring_manager', 'Hiring Manager')
 
     # Step 3: return the file for preview
     body = {

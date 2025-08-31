@@ -5,19 +5,22 @@ from .open_ai_writer import generate_job_bullets
 from .utils import pdf_utils
 import textwrap
 
-def build_resume_preview(metadata: dict, history: dict) -> dict:
+def build_resume_preview(job_metadata: dict, user_history: dict) -> dict:
     """
     Build resume data preview dictionary.
+
+    :param job_metadata: Job related dictionary that includes hiring_manager, job_description and additional_messages
+    :param user_history: Dictionary of the user's resume work history
     """
 
     # Step 1: Generate initial resume content
-    wrapped_profile = textwrap.fill(history['profile'].strip(), width=80)
+    wrapped_profile = textwrap.fill(user_history['profile'].strip(), width=80)
 
     # bullet points
-    bullets = generate_job_bullets(metadata, history)
+    bullets = generate_job_bullets(job_metadata, user_history)
 
     # skills
-    skills = history['skills']
+    skills = user_history['skills']
 
     # Step 2: Write content to temp json file for approval
 
