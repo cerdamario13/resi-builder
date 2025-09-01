@@ -2,17 +2,34 @@ from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from .open_ai_writer import cover_letter_generator
 from .utils import pdf_utils
+import json
+from typing import Union
+import copy
 
 
-def build_cover_letter_preview(job_metadata: dict, user_history: dict) -> dict:
+def build_cover_letter_preview(job_metadata: dict, user_history: Union[str, dict]) -> dict:
     """
     Build the cover letter data preview dictionary.
 
-    :param job_metadata: 
+    :param job_metadata: Job related dictionary that includes hiring_manager, job_description and additional_messages
+    :param user_history: Either a dictionary of the user's resume work history,
+                         or a path to a JSON file containing that dictionary.
+    :return: Cover Letter preview dictionary
     """
 
+    # Normalize input: if user_history is a str, load JSON file
+    if isinstance(user_history, str):
+        with open(user_history, "r") as f:
+            user_history = json.load(f)
+
+    user_history_copy = copy.deepcopy(user_history)
+
+    # Delete the contact info to avoid passing personal data to the LLM except for name
+    del user_history_copy['contact_info']
+    user_history_copy['contact_info'] = {'name': user_history['contact_info']['name']}
+
     # Step 1: Generate initial cover letter text
-    body = cover_letter_generator(job_metadata, user_history)
+    body = cover_letter_generator(job_metadata, user_history_copy)
 
     # Step 2: Write it to a temp text file for approval
     paragraphs = body.strip().split("\n\n")
@@ -29,10 +46,20 @@ def build_cover_letter_preview(job_metadata: dict, user_history: dict) -> dict:
     return body
 
 
-def build_cover_letter_pdf(body, user_history):
+def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
     """
     Build the cover letter as a pdf file.
+
+    :param body: cover letter body as a dictionary
+    :param user_history: Either a dictionary of the user's resume work history,
+                         or a path to a JSON file containing that dictionary.
+    :return: PDF cover letter file
     """
+
+    # Normalize input: if user_history is a str, load JSON file
+    if isinstance(user_history, str):
+        with open(user_history, "r") as f:
+            user_history = json.load(f)
 
     # Remove any spaces at the end
     paragraphs = [x.strip() for x in body['cover_letter_data']['paragraphs'].values()]

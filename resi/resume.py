@@ -4,39 +4,63 @@ from reportlab.lib import colors
 from .open_ai_writer import generate_job_bullets
 from .utils import pdf_utils
 import textwrap
+from typing import Union
+import json
+import copy
 
-def build_resume_preview(job_metadata: dict, user_history: dict) -> dict:
+def build_resume_preview(job_metadata: dict, user_history: Union[str, dict]) -> dict:
     """
     Build resume data preview dictionary.
 
     :param job_metadata: Job related dictionary that includes hiring_manager, job_description and additional_messages
-    :param user_history: Dictionary of the user's resume work history
+    :param user_history: Either a dictionary of the user's resume work history,
+                         or a path to a JSON file containing that dictionary.
+    :return: Resume preview dictionary
     """
 
+    # Normalize input: if user_history is a str, load JSON file
+    if isinstance(user_history, str):
+        with open(user_history, "r") as f:
+            user_history = json.load(f)
+
+    user_history_copy = copy.deepcopy(user_history)
+
+    # Delete the contact info to avoid passing personal data to the LLM except for name
+    del user_history_copy['contact_info']
+    user_history_copy['contact_info'] = {'name': user_history['contact_info']['name']}
+
     # Step 1: Generate initial resume content
-    wrapped_profile = textwrap.fill(user_history['profile'].strip(), width=80)
+    wrapped_profile = textwrap.fill(user_history_copy['profile'].strip(), width=80)
 
     # bullet points
-    bullets = generate_job_bullets(job_metadata, user_history)
+    bullets = generate_job_bullets(job_metadata, user_history_copy)
 
     # skills
-    skills = user_history['skills']
+    skills = user_history_copy['skills']
 
-    # Step 2: Write content to temp json file for approval
-
+    # Step 2: Build preview dictionary
     body = {
         'profile': wrapped_profile,
         'bullets': bullets,
         'skills': skills,
     }
 
-    # Step 3: Return the file for review
     return body
 
-def build_resume_pdf(body: dict, user_history: dict):
+def build_resume_pdf(body: dict, user_history: Union[str, dict]) -> None:
     """
     Build the resume as a pdf file
+
+    :param body: resume body as a dictionary
+    :param user_history: Either a dictionary of the user's resume work history,
+                         or a path to a JSON file containing that dictionary.
+    :return: PDF resume file
     """
+
+    # Normalize input: if user_history is a str, load JSON file
+    if isinstance(user_history, str):
+        with open(user_history, "r") as f:
+            user_history = json.load(f)
 
     # Build the PDF
     doc = SimpleDocTemplate(body['resume_file_name'], pagesize=LETTER, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=24)
