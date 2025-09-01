@@ -1,6 +1,6 @@
 # Resi-builder
 
-Create a resume and cover letter
+Create a resume and cover letter tailored to a specific job description using AI.
 
 ## Installation
 
