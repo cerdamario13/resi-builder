@@ -6,8 +6,8 @@ setup(
     author="Mario Cerda",
     author_email="cerdamario13@gmail.com",
     description="Create a resume and cover letter automatically",
-    long_description=open("README.md").read(),
+    long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    packages=find_packages(),
+    packages=find_packages(include=["resi", "resi.*"]),
     python_requires=">=3.10",
 )
