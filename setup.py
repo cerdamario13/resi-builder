@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="resi-builder",
-    version="0.1.2",
+    version="0.1.1",
     author="Mario Cerda",
     author_email="cerdamario13@gmail.com",
     description="Create a resume and cover letter automatically",
