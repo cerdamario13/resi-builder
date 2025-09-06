@@ -5,7 +5,7 @@ from .utils import pdf_utils
 import json
 from typing import Union
 import copy
-
+import os
 
 def build_cover_letter_preview(job_metadata: dict, user_history: Union[str, dict]) -> dict:
     """
@@ -61,11 +61,17 @@ def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
         with open(user_history, "r") as f:
             user_history = json.load(f)
 
+    # Check if there is a file name provided and normalize to pdf
+    file_name = body.get('cover_letter_file_name', 'cover_letter.pdf')
+    base, ext = os.path.splitext(file_name)
+    if ext.lower() != '.pdf':
+        file_name = f"{base}.pdf"
+
     # Remove any spaces at the end
     paragraphs = [x.strip() for x in body['cover_letter_data']['paragraphs'].values()]
 
     # Build the PDF
-    doc = SimpleDocTemplate(body['cover_letter_file_name'], pagesize=LETTER, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=24)
+    doc = SimpleDocTemplate(file_name, pagesize=LETTER, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=24)
     Story = []
 
     styles = pdf_utils.get_styles()
@@ -87,6 +93,6 @@ def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
     Story.append(Paragraph(f"Sincerely<br/>{'Mario Cerda'}", styles['CustomBodyText']))
 
     doc.build(Story)
-    print(f"Cover letter generated: {body['cover_letter_file_name']}")
+    print(f"Cover letter generated: {file_name}")
 
     
