@@ -84,7 +84,7 @@ def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
         Story.append(Spacer(1, 12))  # Paragraph break
 
     # Sign off
-    Story.append(Paragraph(f"Sincerely<br/>{'Mario Cerda'}", styles['CustomBodyText']))
+    Story.append(Paragraph(f"Sincerely<br/>{user_history['contact_info']['name']}", styles['CustomBodyText']))
 
     doc.build(Story)
     print(f"Cover letter generated: {body['cover_letter_file_name']}")
