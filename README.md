@@ -63,7 +63,6 @@ In order to make a preview resume use the following
 ```python
 import resi
 
-
 # import the job desc from a text file
 with open('job_desc.txt', 'r') as f:
     job_desc = f.read()
@@ -73,7 +72,7 @@ metadata = {
     'hiring_manager': '',
     'job_desc': job_desc,
     'additional_message': '',
-    'resume_file_name': 'resume'
+    'resume_file_name': 'resume.pdf'
 }
 
 # Build the preview data - output will be a python dictionary
