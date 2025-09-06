@@ -101,19 +101,37 @@ resi.resume.build_resume_pdf(
 ```python
 import resi
 
+# import the job desc from a text file
+with open('job_desc.txt', 'r') as f:
+    job_desc = f.read()
+
 # Job metadata
 metadata = {
-    'hiring_manager': '',
-    'job_desc': 'Job Description' # job description is only needed for preview
+    'hiring_manager': 'Mr. Weyland',
+    'job_desc': job_desc,
+    'additional_message': '',
+    'cover_letter_file_name': 'cover_letter.pdf'
 }
 
-# Build the preview data
-cover_letter_data = resi.cover_letter.build_cover_letter_preview(metadata, user_history)
+# Build the preview data - output will be a python dictionary
+cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
+    metadata,
+    'user_history.json', # Importing a file via file path
+)
 
-# Be sure to preview the data before building the final file
+# cover letter metadata
+cover_letter_metadata = {
+    'hiring_manager': 'Mr. Weyland',
+    'cover_letter_file_name': 'cover_letter.pdf',
+    'cover_letter_data': cover_letter_data
+}
 
-# Build the final PDF file
-resi.cover_letter.build_cover_letter_pdf(cover_letter_data, user_history)
+# Build the file
+resi.cover_letter.build_cover_letter_pdf(
+    cover_letter_metadata,
+    'user_history.json'
+)
+
 ```
 
 ## Example
