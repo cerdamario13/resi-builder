@@ -136,8 +136,6 @@ resi.cover_letter.build_cover_letter_pdf(
 
 ## Example
 
-### Resume
-
 To start using resi-builder. First find and copy the job description
 
 <details>
@@ -286,6 +284,8 @@ Loyalty to Weyland-Yutani’s mission of "Building Better Worlds" is essential.
 
 </details>
 
+### Resume
+
 Sample code
 
 ```python
@@ -388,5 +388,61 @@ resi.resume.build_resume_pdf(
 ![resume_first_page2](/data/imgs/resume2.jpg)
 
 
+### Cover Letter
 
+Sample Code
 
+```python
+# import the job desc from a text file
+with open('job_desc.txt', 'r') as f:
+    job_desc = f.read()
+
+# Job metadata
+metadata = {
+    'hiring_manager': 'Mr. Weyland',
+    'job_desc': job_desc,
+    'additional_message': '',
+    'cover_letter_file_name': 'cover_letter.pdf'
+}
+
+# Build the preview data - output will be a python dictionary
+cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
+    metadata,
+    'user_history.json', # Importing a file via file path
+)
+```
+
+<details>
+
+  <summary>Preview output</summary>
+
+  ```JSON
+{
+    "intro": "Dear Mr. Weyland,",
+    "paragraphs": {
+        "0": "I am excited to apply for the position of Science Officer aboard your exploratory deep space research vessel. With a Ph.D. in Astrobiology and Exobiology from Caltech, as well as a Master\'s degree in Astrophysics from the University of Cambridge, I have developed a strong foundation in planetary sciences and biological research in extreme environments. My over 15 years of experience in space exploration and exobiology, including leading biological research during a four-year mission to Saturn\\u2019s moon Titan with the European Space Agency, aligns well with the responsibilities of this role.",
+        "1": "Throughout my career, I have led scientific investigations focused on extraterrestrial sample collection, preservation, and analysis, ensuring rigorous safety protocols are maintained in hazardous conditions. I have coordinated closely with engineering and operations teams to integrate scientific findings into mission strategies, similar to the interdisciplinary collaboration required on your vessel. My experience in developing AI-assisted data pipelines to automate biological sample classification demonstrates my ability to leverage advanced technologies in remote environments. Additionally, my work at Weyland-Yutani as a Senior Research Scientist involved conducting microbial extremophile studies in simulated exoplanetary environments and establishing containment protocols to minimize environmental risks.",
+        "2": "I am confident that my background in astrobiology, experience in planetary survey protocols, and proven leadership in scientific research teams under constrained conditions will contribute significantly to the success of your mission. My extensive documentation of scientific findings and ability to communicate complex data clearly to diverse audiences will support Weyland-Yutani\'s objectives of building better worlds through pioneering exploration."
+    }
+}
+  ```
+</details>
+
+Now to build the cover letter file
+
+```python
+# cover letter metadata
+cover_letter_metadata = {
+    'hiring_manager': 'Mr. Weyland',
+    'cover_letter_file_name': 'cover_letter.pdf',
+    'cover_letter_data': cover_letter_data
+}
+
+# Build the file
+resi.cover_letter.build_cover_letter_pdf(
+    cover_letter_metadata,
+    'user_history.json'
+)
+```
+
+![cover_letter](/data/imgs/cover_letter.jpg)
