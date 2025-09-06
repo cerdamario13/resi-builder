@@ -10,4 +10,5 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(include=["resi", "resi.*"]),
     python_requires=">=3.10",
+    url='https://github.com/cerdamario13/resi-builder',
 )
