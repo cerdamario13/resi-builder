@@ -13,6 +13,7 @@ __pycache__/
 # ignore temp review files
 src/temp_files/*.txt
 src/temp_files/*.json
+local_testing
 
 # C extensions
 *.so
