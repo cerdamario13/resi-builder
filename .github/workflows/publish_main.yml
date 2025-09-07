@@ -30,7 +30,6 @@ jobs:
 
       - name: Run tests
         run: |
-          cd tests
-          pytest
+          pytest tests
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
