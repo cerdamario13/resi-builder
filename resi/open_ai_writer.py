@@ -84,7 +84,7 @@ def generate_job_bullets(metadata: dict, history: dict) -> dict:
             ]
 
             Also take in any additional instructions from the user if any:
-            {metadata['additional_message']}
+            {metadata.get('additional_message', '')}
             """}
         ]
     )
