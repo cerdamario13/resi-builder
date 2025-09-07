@@ -1,0 +1,73 @@
+{
+  "contact_info": {
+    "name": "Dr. Elena Vasquez",
+    "phone": "+1 (555) 392-1847",
+    "email": "elena.vasquez@exobio-research.org",
+    "linkedIn": "https://www.linkedin.com/in/elena-vasquez-exobio"
+  },
+  "education": [
+    {
+      "school": "California Institute of Technology (Caltech)",
+      "degree": "Ph.D.",
+      "field_of_study": "Astrobiology & Exobiology",
+      "location": "Pasadena, CA, USA"
+    },
+    {
+      "school": "University of Cambridge",
+      "degree": "M.Sc.",
+      "field_of_study": "Astrophysics",
+      "location": "Cambridge, UK"
+    }
+  ],
+  "history": [
+    {
+      "role": "Lead Exobiologist",
+      "company": "European Space Agency (ESA) – Titan Life Probe Mission",
+      "dates": "2120 – 2125",
+      "experience": [
+        "Directed on-site biological research during a 4-year mission to Saturn’s moon Titan.",
+        "Led the collection and preservation of organic compounds under extreme conditions.",
+        "Coordinated with engineering and operations teams to integrate scientific findings into navigation and mission decisions.",
+        "Delivered classified mission reports to ESA and UN Interstellar Regulatory Council."
+      ],
+      "industry": ["Space Exploration", "Exobiology", "Astrobiology"]
+    },
+    {
+      "role": "Senior Research Scientist – Exoplanetary Microbiology",
+      "company": "Weyland-Yutani Advanced Research Division",
+      "dates": "2115 – 2120",
+      "experience": [
+        "Led a cross-disciplinary team analyzing microbial extremophiles in simulated exoplanetary environments.",
+        "Developed AI-assisted data pipelines for autonomous biological sample classification.",
+        "Established safety protocols for extraterrestrial sample containment, reducing contamination risk by 98%.",
+        "Contributed to feasibility assessments for multiple exploratory-class vessel missions."
+      ],
+      "industry": ["Corporate Research", "Space Biotechnology", "Astrobiology"]
+    },
+    {
+      "role": "Astrobiology Research Fellow",
+      "company": "NASA Ames Research Center",
+      "dates": "2110 – 2115",
+      "experience": [
+        "Conducted planetary analog studies in Earth’s most extreme deserts and deep-sea environments.",
+        "Published 14 peer-reviewed papers on microbial survivability in vacuum and radiation environments.",
+        "Served as scientific liaison for mission-planning teams on Mars and Europa exploration programs."
+      ],
+      "industry": ["Government Research", "Planetary Science", "Biotechnology"]
+    }
+  ],
+  "activities_and_interests": "Deep-sea diving expeditions, xenolinguistics research, mentoring young scientists in interstellar exploration programs, and contributing to open-source AI models for biological pattern recognition.",
+  "profile": "Astrobiologist and exobiology expert with over 15 years of applied research experience in remote and hazardous environments. Proven leadership on interstellar missions and deep-space expeditions, with extensive expertise in extraterrestrial sample collection, biological risk assessment, and AI-driven research methodologies. Skilled in bridging scientific insight with operational mission strategy under extreme isolation and high-stakes conditions.",
+  "skills": [
+    "Astrobiology",
+    "Exobiology",
+    "Exoplanetary Microbiology",
+    "Risk Assessment",
+    "Scientific Leadership",
+    "AI-Assisted Data Analysis",
+    "Planetary Survey Protocols",
+    "Extraterrestrial Sample Preservation",
+    "Mission Report Writing",
+    "Cross-disciplinary Collaboration"
+  ]
+}
