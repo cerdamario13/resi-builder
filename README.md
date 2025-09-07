@@ -69,10 +69,8 @@ with open('job_desc.txt', 'r') as f:
 
 # Job metadata
 metadata = {
-    'hiring_manager': '',
     'job_desc': job_desc,
-    'additional_message': '',
-    'resume_file_name': 'resume.pdf'
+    'additional_message': '', # Optional
 }
 
 # Build the preview data - output will be a python dictionary
@@ -83,14 +81,14 @@ resume_data =  resi.resume.build_resume_preview(
 
 # resume_metadata
 resume_metadata = {
-    'resume_file_name': 'resume.pdf',
+    'resume_file_name': 'resume.pdf', # Optional
     'resume_data': resume_data
 }
 
 # Build the file
 resi.resume.build_resume_pdf(
     resume_metadata,
-    'user_history.json'
+    'user_history.json' # can be a file path or a dict
 )
 
 
@@ -107,10 +105,8 @@ with open('job_desc.txt', 'r') as f:
 
 # Job metadata
 metadata = {
-    'hiring_manager': 'Mr. Weyland',
     'job_desc': job_desc,
-    'additional_message': '',
-    'cover_letter_file_name': 'cover_letter.pdf'
+    'additional_message': '', # Optional
 }
 
 # Build the preview data - output will be a python dictionary
@@ -121,15 +117,15 @@ cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
 
 # cover letter metadata
 cover_letter_metadata = {
-    'hiring_manager': 'Mr. Weyland',
-    'cover_letter_file_name': 'cover_letter.pdf',
+    'hiring_manager': 'Mr. Weyland', # Optional will default to 'Hiring Manager'
+    'cover_letter_file_name': 'cover_letter.pdf', # Optional
     'cover_letter_data': cover_letter_data
 }
 
 # Build the file
 resi.cover_letter.build_cover_letter_pdf(
     cover_letter_metadata,
-    'user_history.json'
+    'user_history.json' # can be a file path or a dict
 )
 
 ```
@@ -297,7 +293,6 @@ with open('job_desc.txt', 'r') as f:
 
 # Job metadata
 metadata = {
-    'hiring_manager': '',
     'job_desc': job_desc,
 }
 
@@ -399,9 +394,7 @@ with open('job_desc.txt', 'r') as f:
 
 # Job metadata
 metadata = {
-    'hiring_manager': 'Mr. Weyland',
     'job_desc': job_desc,
-    'additional_message': '',
     'cover_letter_file_name': 'cover_letter.pdf'
 }
 

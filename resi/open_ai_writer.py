@@ -30,6 +30,9 @@ def cover_letter_generator(metadata: dict, history):
             User work history:
             {history}
 
+            Also take in any additional instructions from the user if any:
+            {metadata.get('additional_message', '')}
+
             Return only the paragraphs of the cover letter.
             """}
         ]
@@ -84,7 +87,7 @@ def generate_job_bullets(metadata: dict, history: dict) -> dict:
             ]
 
             Also take in any additional instructions from the user if any:
-            {metadata['additional_message']}
+            {metadata.get('additional_message', '')}
             """}
         ]
     )
