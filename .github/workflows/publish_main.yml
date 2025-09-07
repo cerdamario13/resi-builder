@@ -29,7 +29,6 @@ jobs:
           pip install build pytest
 
       - name: Run tests
-        if: github.event_name == 'pull_request'
         run: |
           cd tests
           pytest
