@@ -28,6 +28,10 @@ jobs:
           pip install -r requirements.txt
           pip install build pytest
 
-      # - name: Run tests
-      #   run: |
-      #     pytest -v
+      - name: Run tests
+        if: github.event_name == 'pull_request'
+        run: |
+          cd tests
+          pytest
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
