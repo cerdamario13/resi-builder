@@ -28,6 +28,8 @@ jobs:
           pip install -r requirements.txt
           pip install build pytest
 
-      # - name: Run tests
-      #   run: |
-      #     pytest -v
+      - name: Run tests
+        run: |
+          pytest tests
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
