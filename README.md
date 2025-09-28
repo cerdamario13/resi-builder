@@ -15,7 +15,7 @@ reportlab
 openai
 ```
 
-An opeanAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable. e.g.
+An OpenAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable. e.g.
 
 ```
 OPENAI_API_KEY: super_secret_key_here
