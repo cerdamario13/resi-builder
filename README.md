@@ -75,16 +75,11 @@ resume_data =  resi.resume.build_resume_preview(
     'Be sure to not include any special characters like: !@#$' # Optional additional prompts
 )
 
-# resume_metadata
-resume_metadata = {
-    'resume_file_name': 'resume.pdf', # Optional
-    'resume_data': resume_data
-}
-
 # Build the file
 resi.resume.build_resume_pdf(
-    resume_metadata,
-    'user_history.json' # can be a file path or a dict
+    resume_data, # dictionary output from build_resume_preview function
+    'user_history.json' # can be a file path or a dict,
+    'resume.pdf,' # Optional file name. This can be a path
 )
 
 

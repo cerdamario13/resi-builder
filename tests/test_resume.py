@@ -30,7 +30,7 @@ def test_resume_preview_with_additional_messages():
         'data/test_data/user_history.json', # Importing a file via file path
         'Translate output to Spanish'
     )
-    
+
     assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
 
 def test_cover_letter_pdf():
@@ -91,14 +91,9 @@ def test_cover_letter_pdf():
         ]
     }
 
-    # resume_metadata
-    resume_metadata = {
-        'resume_file_name': 'data/test_data/output_files/resume.pdf',
-        'resume_data': resume_data
-    }
-
     # Build the file
     resi.resume.build_resume_pdf(
-        resume_metadata,
-        'data/test_data/user_history.json'
+        resume_data,
+        'data/test_data/user_history.json',
+        'data/test_data/output_files/resume.pdf'
     )

@@ -57,13 +57,18 @@ def build_resume_preview(
 
     return body
 
-def build_resume_pdf(body: dict, user_history: Union[str, dict]) -> None:
+def build_resume_pdf(
+        resume_data: dict,
+        user_history: Union[str, dict],
+        file_name: str = 'resume.pdf'
+    ) -> None:
     """
     Build the resume as a pdf file
 
-    :param body: resume body as a dictionary
+    :param resume_data: dictionary containing resume data
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
+    :param file_name: file name of the output. This can be a path to the output
     :return: PDF resume file
     """
 
@@ -73,7 +78,6 @@ def build_resume_pdf(body: dict, user_history: Union[str, dict]) -> None:
             user_history = json.load(f)
 
     # Check if there is a file name provided and normalize to pdf
-    file_name = body.get('resume_file_name', 'resume.pdf')
     base, ext = os.path.splitext(file_name)
     if ext.lower() != '.pdf':
         file_name = f"{base}.pdf"
@@ -90,11 +94,11 @@ def build_resume_pdf(body: dict, user_history: Union[str, dict]) -> None:
     pdf_utils.add_info_bar(Story, styles, [x for x in user_history['contact_info'].values()])
 
     # Profile
-    pdf_utils.add_section(Story, "Profile", styles, content=body['resume_data']['profile'])
+    pdf_utils.add_section(Story, "Profile", styles, content=resume_data['profile'])
 
     # Experience
     pdf_utils.add_section(Story, "Experience", styles)
-    for exp in body['resume_data']['bullets']:
+    for exp in resume_data['bullets']:
         pdf_utils.add_section(
             Story,
             f"{exp['role'].upper()} | {exp['company'].upper()} | {exp['dates'].upper()}",
@@ -109,13 +113,13 @@ def build_resume_pdf(body: dict, user_history: Union[str, dict]) -> None:
     # Skills
 
     # Make sure number of skills is even (pad if needed)
-    if len(body['resume_data']['skills']) % 2 != 0:
-        body['resume_data']['skills'].append("")
+    if len(resume_data['skills']) % 2 != 0:
+        resume_data['skills'].append("")
 
-    half = len(body['resume_data']['skills']) // 2
+    half = len(resume_data['skills']) // 2
     data = list(zip(
-        [f"• {skill}" for skill in body['resume_data']['skills'][:half]],
-        [f"• {skill}" if skill else '' for skill in body['resume_data']['skills'][half:]] # ensure that the last value is not displayed if empty
+        [f"• {skill}" for skill in resume_data['skills'][:half]],
+        [f"• {skill}" if skill else '' for skill in resume_data['skills'][half:]] # ensure that the last value is not displayed if empty
     ))
 
     table = Table(data, colWidths=[250, 250])  # Adjust widths as needed
