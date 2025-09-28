@@ -15,10 +15,14 @@ reportlab
 openai
 ```
 
-An opeanAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable.
+An OpenAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable. e.g.
+
+```
+OPENAI_API_KEY: super_secret_key_here
+```
 
 ## Personal Information
-resi-builder does not pass personal information to the LLM aside from Name. For more information see `build_resume_preview` function in `resume` directory.
+resi-builder does not pass personal information to the LLM aside from Name and Hiring manager's name. For more information see `build_resume_preview` function in `resume` directory.
 
 ## Build User History
 
@@ -67,28 +71,19 @@ import resi
 with open('job_desc.txt', 'r') as f:
     job_desc = f.read()
 
-# Job metadata
-metadata = {
-    'job_desc': job_desc,
-    'additional_message': '', # Optional
-}
 
 # Build the preview data - output will be a python dictionary
 resume_data =  resi.resume.build_resume_preview(
-    metadata,
-    'user_history.json', # Importing a file via file path
+    job_desc,
+    'user_history.json', # Importing a file via file path. This can also be dictionary
+    'Be sure to not include any special characters like: !@#$' # Optional additional prompts
 )
-
-# resume_metadata
-resume_metadata = {
-    'resume_file_name': 'resume.pdf', # Optional
-    'resume_data': resume_data
-}
 
 # Build the file
 resi.resume.build_resume_pdf(
-    resume_metadata,
-    'user_history.json' # can be a file path or a dict
+    resume_data, # dictionary output from build_resume_preview function
+    'user_history.json' # can be a file path or a dict,
+    'resume.pdf' # Optional file name. This can be a path
 )
 
 
@@ -103,29 +98,19 @@ import resi
 with open('job_desc.txt', 'r') as f:
     job_desc = f.read()
 
-# Job metadata
-metadata = {
-    'job_desc': job_desc,
-    'additional_message': '', # Optional
-}
-
 # Build the preview data - output will be a python dictionary
 cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
-    metadata,
-    'user_history.json', # Importing a file via file path
+    job_desc,
+    'user_history.json', # Importing a file via file path. This can also be dictionary
+    'Mr. Weyland', # Optional name of the hiring manager - default to Hiring Manager,
+    'Be sure to not include any special characters like: !@#$' # Optional additional prompts
 )
-
-# cover letter metadata
-cover_letter_metadata = {
-    'hiring_manager': 'Mr. Weyland', # Optional will default to 'Hiring Manager'
-    'cover_letter_file_name': 'cover_letter.pdf', # Optional
-    'cover_letter_data': cover_letter_data
-}
 
 # Build the file
 resi.cover_letter.build_cover_letter_pdf(
-    cover_letter_metadata,
-    'user_history.json' # can be a file path or a dict
+    cover_letter_data,
+    'user_history.json', # can be a file path or a dict
+    'cover_letter.pdf', # Optional
 )
 
 ```

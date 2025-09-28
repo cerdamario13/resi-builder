@@ -7,13 +7,20 @@ from typing import Union
 import copy
 import os
 
-def build_cover_letter_preview(job_metadata: dict, user_history: Union[str, dict]) -> dict:
+def build_cover_letter_preview(
+        job_desc: str,
+        user_history: Union[str, dict],
+        hiring_manager: str = 'Hiring Manager',
+        additional_prompts: str = '',
+    ) -> dict:
     """
     Build the cover letter data preview dictionary.
 
-    :param job_metadata: Job related dictionary that includes hiring_manager, job_description and additional_messages
+    :param job_desc: Job Description
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
+    :param hiring_manager: (Optional) Name of the Hiring manager
+    :param additional_prompts: (Optional) Additional prompts for the LLM
     :return: Cover Letter preview dictionary
     """
 
@@ -29,13 +36,14 @@ def build_cover_letter_preview(job_metadata: dict, user_history: Union[str, dict
     user_history_copy['contact_info'] = {'name': user_history['contact_info']['name']}
 
     # Step 1: Generate initial cover letter text
-    body = cover_letter_generator(job_metadata, user_history_copy)
+    body = cover_letter_generator(
+        job_desc,
+        user_history_copy,
+        additional_prompts
+    )
 
     # Step 2: Write it to a temp text file for approval
     paragraphs = body.strip().split("\n\n")
-
-    # Check if hiring manager is filled, if not use generic
-    hiring_manager = job_metadata.get('hiring_manager', 'Hiring Manager')
 
     # Step 3: return the file for preview
     body = {
@@ -46,13 +54,18 @@ def build_cover_letter_preview(job_metadata: dict, user_history: Union[str, dict
     return body
 
 
-def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
+def build_cover_letter_pdf(
+        cover_letter_data: dict,
+        user_history: Union[str, dict],
+        file_name: str = 'cover_letter.pdf'
+    ) -> None:
     """
     Build the cover letter as a pdf file.
 
-    :param body: cover letter body as a dictionary
-    :param user_history: Either a dictionary of the user's resume work history,
+    :param cover_letter_data: Dictionary containing cover letter data
+    :param user_history: Either a dictionary of the user's resume work history.
                          or a path to a JSON file containing that dictionary.
+    :param file_name: (Optional) file name of the output. This can be a path to the output
     :return: PDF cover letter file
     """
 
@@ -62,13 +75,12 @@ def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
             user_history = json.load(f)
 
     # Check if there is a file name provided and normalize to pdf
-    file_name = body.get('cover_letter_file_name', 'cover_letter.pdf')
     base, ext = os.path.splitext(file_name)
     if ext.lower() != '.pdf':
         file_name = f"{base}.pdf"
 
     # Remove any spaces at the end
-    paragraphs = [x.strip() for x in body['cover_letter_data']['paragraphs'].values()]
+    paragraphs = [x.strip() for x in cover_letter_data['paragraphs'].values()]
 
     # Build the PDF
     doc = SimpleDocTemplate(file_name, pagesize=LETTER, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=24)
@@ -81,7 +93,7 @@ def build_cover_letter_pdf(body: dict, user_history: Union[str, dict]) -> None:
     pdf_utils.add_info_bar(Story, styles, [x for x in user_history['contact_info'].values()])
 
     # Greeting
-    Story.append(Paragraph(f"Dear {body['hiring_manager']},", styles['CustomBodyText']))
+    Story.append(Paragraph(cover_letter_data['intro'], styles['CustomBodyText']))
     Story.append(Spacer(1, 12))  # Paragraph break
 
     # Paragraph section

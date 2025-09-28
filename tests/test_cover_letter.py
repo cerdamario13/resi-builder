@@ -9,16 +9,29 @@ def test_cover_letter_preview():
     with open('data/test_data/job_desc.txt', 'r') as f:
         job_desc = f.read()
 
-    # Job metadata
-    metadata = {
-        'job_desc': job_desc,
-        # 'additional_message': 'Translate to Spanish', 
-    }
+    # Build the preview data - output will be a python dictionary
+    cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
+        job_desc,
+        'data/test_data/user_history.json', # Importing a file via file path
+    )
+
+    assert list(cover_letter_data.keys()) == ['intro', 'paragraphs']
+
+def test_cover_letter_preview_additional_prompts():
+    """
+    Test that the preview is working
+    """
+
+    # import the job desc from a text file
+    with open('data/test_data/job_desc.txt', 'r') as f:
+        job_desc = f.read()
 
     # Build the preview data - output will be a python dictionary
     cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
-        metadata,
+        job_desc,
         'data/test_data/user_history.json', # Importing a file via file path
+        None,
+        'Translate to Spanish'
     )
 
     assert list(cover_letter_data.keys()) == ['intro', 'paragraphs']
@@ -38,16 +51,10 @@ def test_cover_letter_pdf():
         }
     }
 
-    # cover letter metadata
-    cover_letter_metadata = {
-        'hiring_manager': 'Mr. Weyland',
-        'cover_letter_file_name': 'data/test_data/output_files/cover_letter',
-        'cover_letter_data': cover_letter_data
-    }
-
     # Build the file
     resi.cover_letter.build_cover_letter_pdf(
-        cover_letter_metadata,
-        'data/test_data/user_history.json'
+        cover_letter_data,
+        'data/test_data/user_history.json',
+        'data/test_data/output_files/cover_letter'
     )
 

@@ -4,10 +4,14 @@ import json
 client = OpenAI()
 open_ai_model = "gpt-4.1-nano"
 
-def cover_letter_generator(metadata: dict, history):
+def cover_letter_generator(
+        job_desc: str,
+        history,
+        additional_prompts
+    ):
 
     # if job desc is empty, then raise an error
-    if metadata['job_desc'].strip() == '':
+    if job_desc == None or job_desc.strip() == '':
         raise ValueError('Job description cannot be empty')
 
     response = client.chat.completions.create(
@@ -25,13 +29,13 @@ def cover_letter_generator(metadata: dict, history):
             Do not use any em dashes.
              
             Job Description:
-            {metadata['job_desc']} 
+            {job_desc} 
 
             User work history:
             {history}
 
             Also take in any additional instructions from the user if any:
-            {metadata.get('additional_message', '')}
+            {additional_prompts.strip()}
 
             Return only the paragraphs of the cover letter.
             """}
@@ -40,10 +44,14 @@ def cover_letter_generator(metadata: dict, history):
 
     return response.choices[0].message.content
 
-def generate_job_bullets(metadata: dict, history: dict) -> dict:
+def generate_job_bullets(
+        job_desc: str,
+        history: dict,
+        additional_prompts: str
+    ) -> dict:
 
     # if job desc is empty, then raise an error
-    if metadata['job_desc'].strip() == '':
+    if job_desc == None or job_desc.strip() == '':
         raise ValueError('Job description cannot be empty')
 
     response = client.chat.completions.create(
@@ -61,7 +69,7 @@ def generate_job_bullets(metadata: dict, history: dict) -> dict:
             Do not use em-dashes in the rewritten bullets.
              
             Job Description:
-            {metadata['job_desc']}
+            {job_desc}
 
             User work history:
             {history}
@@ -87,7 +95,7 @@ def generate_job_bullets(metadata: dict, history: dict) -> dict:
             ]
 
             Also take in any additional instructions from the user if any:
-            {metadata.get('additional_message', '')}
+            {additional_prompts.strip()}
             """}
         ]
     )

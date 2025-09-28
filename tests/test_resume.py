@@ -8,15 +8,27 @@ def test_resume_preview():
     with open('data/test_data/job_desc.txt', 'r') as f:
         job_desc = f.read()
 
-    # Job metadata
-    metadata = {
-        'job_desc': job_desc,
-    }
+    # Build the preview data - output will be a python dictionary
+    resume_data =  resi.resume.build_resume_preview(
+        job_desc,
+        'data/test_data/user_history.json', # Importing a file via file path
+    )
+
+    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
+
+def test_resume_preview_with_additional_messages():
+    """
+    Test the resume preview
+    """
+    # import the job desc from a text file
+    with open('data/test_data/job_desc.txt', 'r') as f:
+        job_desc = f.read()
 
     # Build the preview data - output will be a python dictionary
     resume_data =  resi.resume.build_resume_preview(
-        metadata,
+        job_desc,
         'data/test_data/user_history.json', # Importing a file via file path
+        'Translate output to Spanish'
     )
 
     assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
@@ -79,14 +91,9 @@ def test_cover_letter_pdf():
         ]
     }
 
-    # resume_metadata
-    resume_metadata = {
-        'resume_file_name': 'data/test_data/output_files/resume.pdf',
-        'resume_data': resume_data
-    }
-
     # Build the file
     resi.resume.build_resume_pdf(
-        resume_metadata,
-        'data/test_data/user_history.json'
+        resume_data,
+        'data/test_data/user_history.json',
+        'data/test_data/output_files/resume.pdf'
     )
