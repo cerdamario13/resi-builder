@@ -15,7 +15,11 @@ reportlab
 openai
 ```
 
-An opeanAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable.
+An opeanAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable. e.g.
+
+```
+OPENAI_API_KEY: super_secret_key_here
+```
 
 ## Personal Information
 resi-builder does not pass personal information to the LLM aside from Name. For more information see `build_resume_preview` function in `resume` directory.
