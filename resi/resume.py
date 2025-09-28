@@ -65,10 +65,10 @@ def build_resume_pdf(
     """
     Build the resume as a pdf file
 
-    :param resume_data: dictionary containing resume data
+    :param resume_data: Dictionary containing resume data
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
-    :param file_name: file name of the output. This can be a path to the output
+    :param file_name: (Optional) file name of the output. This can be a path to the output
     :return: PDF resume file
     """
 
