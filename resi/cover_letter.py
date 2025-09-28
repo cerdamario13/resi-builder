@@ -20,7 +20,7 @@ def build_cover_letter_preview(
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
     :param hiring_manager: (Optional) Name of the Hiring manager
-    :param additional_prompt: (Optional) Additional prompts for the LLM
+    :param additional_prompts: (Optional) Additional prompts for the LLM
     :return: Cover Letter preview dictionary
     """
 

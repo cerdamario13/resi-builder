@@ -17,7 +17,7 @@ def test_cover_letter_preview():
 
     assert list(cover_letter_data.keys()) == ['intro', 'paragraphs']
 
-def test_cover_letter_preview_additional_prompt():
+def test_cover_letter_preview_additional_prompts():
     """
     Test that the preview is working
     """

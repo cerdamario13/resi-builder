@@ -7,7 +7,7 @@ open_ai_model = "gpt-4.1-nano"
 def cover_letter_generator(
         job_desc: str,
         history,
-        additional_prompt
+        additional_prompts
     ):
 
     # if job desc is empty, then raise an error
@@ -35,7 +35,7 @@ def cover_letter_generator(
             {history}
 
             Also take in any additional instructions from the user if any:
-            {additional_prompt.strip()}
+            {additional_prompts.strip()}
 
             Return only the paragraphs of the cover letter.
             """}
