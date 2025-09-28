@@ -83,7 +83,7 @@ resume_data =  resi.resume.build_resume_preview(
 resi.resume.build_resume_pdf(
     resume_data, # dictionary output from build_resume_preview function
     'user_history.json' # can be a file path or a dict,
-    'resume.pdf,' # Optional file name. This can be a path
+    'resume.pdf' # Optional file name. This can be a path
 )
 
 
