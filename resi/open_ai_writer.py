@@ -47,7 +47,7 @@ def generate_job_bullets(
     ) -> dict:
 
     # if job desc is empty, then raise an error
-    if job_desc.strip() == '':
+    if job_desc == None or job_desc.strip() == '':
         raise ValueError('Job description cannot be empty')
 
     response = client.chat.completions.create(
