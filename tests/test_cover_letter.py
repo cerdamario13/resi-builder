@@ -12,7 +12,7 @@ def test_cover_letter_preview():
     # Build the preview data - output will be a python dictionary
     cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
         job_desc,
-        'data/test_data/user_history.json', # Importing a file via file path,
+        'data/test_data/user_history.json', # Importing a file via file path
     )
 
     assert list(cover_letter_data.keys()) == ['intro', 'paragraphs']
@@ -29,7 +29,7 @@ def test_cover_letter_preview_additional_prompts():
     # Build the preview data - output will be a python dictionary
     cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
         job_desc,
-        'data/test_data/user_history.json', # Importing a file via file path,
+        'data/test_data/user_history.json', # Importing a file via file path
         None,
         'Translate to Spanish'
     )
