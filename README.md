@@ -101,7 +101,7 @@ with open('job_desc.txt', 'r') as f:
 # Build the preview data - output will be a python dictionary
 cover_letter_data =  resi.cover_letter.build_cover_letter_preview(
     job_desc,
-    'user_history.json', # Importing a file via file path. This can also be dictionary,
+    'user_history.json', # Importing a file via file path. This can also be dictionary
     'Mr. Weyland', # Optional name of the hiring manager - default to Hiring Manager,
     'Be sure to not include any special characters like: !@#$' # Optional additional prompts
 )
