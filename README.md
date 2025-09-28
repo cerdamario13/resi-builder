@@ -67,16 +67,12 @@ import resi
 with open('job_desc.txt', 'r') as f:
     job_desc = f.read()
 
-# Job metadata
-metadata = {
-    'job_desc': job_desc,
-    'additional_message': '', # Optional
-}
 
 # Build the preview data - output will be a python dictionary
 resume_data =  resi.resume.build_resume_preview(
-    metadata,
+    job_desc,
     'user_history.json', # Importing a file via file path
+    'Be sure to not include any special characters like: !@#$' # Optional additional prompts
 )
 
 # resume_metadata

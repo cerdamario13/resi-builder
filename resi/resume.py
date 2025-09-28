@@ -9,13 +9,18 @@ import json
 import copy
 import os
 
-def build_resume_preview(job_metadata: dict, user_history: Union[str, dict]) -> dict:
+def build_resume_preview(
+        job_desc: str,
+        user_history: Union[str, dict],
+        additional_prompts: str = ""
+    ) -> dict:
     """
     Build resume data preview dictionary.
 
-    :param job_metadata: Job related dictionary that includes hiring_manager, job_description and additional_messages
+    :param job_desc: Job description
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
+    :param additional_prompts: (Optional) Additional prompts for the LLM
     :return: Resume preview dictionary
     """
 
@@ -34,7 +39,11 @@ def build_resume_preview(job_metadata: dict, user_history: Union[str, dict]) -> 
     wrapped_profile = textwrap.fill(user_history_copy['profile'].strip(), width=80)
 
     # bullet points
-    bullets = generate_job_bullets(job_metadata, user_history_copy)
+    bullets = generate_job_bullets(
+        job_desc,
+        user_history_copy,
+        additional_prompts
+    )
 
     # skills
     skills = user_history_copy['skills']
