@@ -1,7 +1,7 @@
 from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle
 from reportlab.lib import colors
-from .open_ai_writer import generate_job_bullets
+from .open_ai_writer import generate_job_bullets, generate_profile
 from .utils import pdf_utils
 import textwrap
 from typing import Union
@@ -36,7 +36,18 @@ def build_resume_preview(
     user_history_copy['contact_info'] = {'name': user_history['contact_info']['name']}
 
     # Step 1: Generate initial resume content
-    wrapped_profile = textwrap.fill(user_history_copy['profile'].strip(), width=80)
+
+    # Check if Profile is missing, if so, generate a profile
+    if 'profile' not in user_history:
+        user_profile = generate_profile(
+            job_desc,
+            user_history_copy
+        )
+    else:
+        user_profile = user_history_copy['profile']
+    
+
+    wrapped_profile = textwrap.fill(user_profile.strip(), width=80)
 
     # bullet points
     bullets = generate_job_bullets(

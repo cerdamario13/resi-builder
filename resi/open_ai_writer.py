@@ -44,6 +44,42 @@ def cover_letter_generator(
 
     return response.choices[0].message.content
 
+def generate_profile(
+    job_desc: str,
+    history: dict
+) -> str:
+    """
+    Generate a resume profile from the user work history that best fits the job description
+    """
+    # Check if parameters are empty
+    if job_desc == None or job_desc.strip() == '':
+        raise ValueError('Job description cannot be empty')
+    
+    if history == None:
+        raise ValueError('Job History cannot be empty')
+    
+    response = client.chat.completions.create(
+        model=open_ai_model,
+        messages=[
+            {"role": "system", "content": "You are a top resume assistant that will help me tailor my resume as best as you can to the given job description."},
+            {"role": "user", "content": f"""
+            Based on the work history of provided below, please generate a short profile summary highlighting the best skills for the job description provided.
+            Make the profile short and to the point.
+            Do not include any experience that is not in provided.
+            Do not use any em-dashes.
+             
+            Job Description:
+            {job_desc}
+
+            User work history:
+            {history}
+             
+            """}
+        ]
+    )
+
+    return response.choices[0].message.content
+
 def generate_job_bullets(
         job_desc: str,
         history: dict,
@@ -63,7 +99,7 @@ def generate_job_bullets(
             Additional Requirements:
             Do not include any text outside the JSON.
             Do not add any experience that is not already in the resume history.
-            When rewriting the bullet points, only specify skills are relevant to the industry in my history.
+            When rewriting the bullet points, only specify skills that are relevant to the industry in my history.
             For example:  Built and maintained end-to-end data pipelines using Python microservices to support data-driven insights for [industry in my history here]
             Only do this if absolutely necessary to better fit the bullet to the job.
             Do not use em-dashes in the rewritten bullets.

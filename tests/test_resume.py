@@ -1,4 +1,5 @@
 import resi
+import json
 
 def test_resume_preview():
     """
@@ -15,6 +16,26 @@ def test_resume_preview():
     )
 
     assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
+
+def test_resume_preview_no_profile():
+    """
+    Test resume preview with no Profile section
+    """
+    with open('data/test_data/job_desc.txt','r') as f:
+        job_desc = f.read()
+    
+    with open('data/test_data/user_history.json', 'r') as f:
+        job_history = json.load(f)
+
+    # Delete the profile from job history to test generation
+    del job_history['profile']
+
+    resume_data = resi.resume.build_resume_preview(
+        job_desc,
+        job_history
+    )
+
+    assert 'profile' in resume_data
 
 def test_resume_preview_with_additional_messages():
     """
