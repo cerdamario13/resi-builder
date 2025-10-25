@@ -59,6 +59,10 @@ The following can be a JSON file or a python dictionary
 }
 ```
 
+## Additional Notes
+
+If `profile` is not provided, resi-builder will build one from the user_history provided. The profile will be tailored to the job description.
+
 ## Build Resume
 
 In order to make a preview resume use the following
