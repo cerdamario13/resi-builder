@@ -13,6 +13,7 @@ pip install resi-builder
 ```python
 reportlab
 openai
+torch --index-url https://download.pytorch.org/whl/cpu
 ```
 
 An OpenAI API key is also required when generating the preview resume/cover letter. This can be stored as an environment variable. e.g.
