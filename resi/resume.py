@@ -1,7 +1,7 @@
 from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle
 from reportlab.lib import colors
-from .open_ai_writer import generate_job_bullets, generate_profile
+from .open_ai_writer import generate_job_bullets, generate_profile, compute_similarity
 from .utils import pdf_utils
 import textwrap
 from typing import Union
@@ -67,6 +67,29 @@ def build_resume_preview(
     }
 
     return body
+
+def compute_resume_similarity(
+        job_desc: str,
+        resume_preview: dict,
+    )-> dict:
+    """
+    Determine how similar a resume_review is to the job description
+
+    :param job_desc: The job description to compare
+    :param resume_preview: The resume description to compare. Must be a dictionary from build_resume_preview
+    """
+
+    # Merge the bullets into a single text
+    new_bullets = [x for sublist in resume_preview['bullets'] for x in sublist['experience']]
+    resume_preview['bullets'] = new_bullets
+
+    # Merge skills list into a comma separated string
+    resume_preview['skills'] = ', '.join(resume_preview['skills'])
+
+    data = compute_similarity(job_desc=job_desc, resume_data=resume_preview)
+
+    return data
+
 
 def build_resume_pdf(
         resume_data: dict,

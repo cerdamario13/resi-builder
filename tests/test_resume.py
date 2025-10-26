@@ -118,3 +118,25 @@ def test_cover_letter_pdf():
         'data/test_data/user_history.json',
         'data/test_data/output_files/resume.pdf'
     )
+
+
+def test_resume_similarity():
+    """
+    Test the similarity between a resume and a job description
+    """
+
+    # Get resume preview data - this is the output from build_resume_preview
+    with open('data/test_data/resume_preview_file.json') as f:
+        resume_preview_data = json.load(f)
+
+    # Get the job desc
+    with open('data/test_data/job_desc.txt','r') as f:
+        job_desc = f.read()
+
+    data = resi.resume.compute_resume_similarity(
+        job_desc=job_desc,
+        resume_preview=resume_preview_data
+    )
+
+    assert len(data.keys()) == 3
+    

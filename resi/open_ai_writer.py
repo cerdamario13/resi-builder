@@ -1,8 +1,11 @@
 from openai import OpenAI
 import json
+import torch
+import torch.nn.functional as F
 
 client = OpenAI()
 open_ai_model = "gpt-4.1-nano"
+embeddings_generator_model = "text-embedding-3-small"
 
 def cover_letter_generator(
         job_desc: str,
@@ -137,3 +140,37 @@ def generate_job_bullets(
     )
     
     return json.loads(response.choices[0].message.content)
+
+def compute_similarity(
+        job_desc: str,
+        resume_data: dict
+) -> dict:
+    
+
+    
+    # Get thee embeddings for each resume section
+    resume_embeddings = {}
+    for section, text in resume_data.items():
+        response = client.embeddings.create(
+            model=embeddings_generator_model,
+            input=text
+        )
+        resume_embeddings[section] = response.data[0].embedding
+
+    # Get the embeddings from the job description
+    job_embeddings = client.embeddings.create(
+        model=embeddings_generator_model,
+        input=job_desc
+    ).data[0].embedding
+
+    # Convert to pytorch tensors
+    job_tensor = torch.tensor(job_embeddings)
+    resume_tensor = {k:torch.tensor(v) for k, v in resume_embeddings.items()}
+
+    similarity_dict = {}
+    # compute cosine similarity
+    for section, emb in resume_tensor.items():
+        similarity = F.cosine_similarity(emb, job_tensor, dim=0)
+        similarity_dict[section] = round(similarity.item(), 3)
+
+    return similarity_dict

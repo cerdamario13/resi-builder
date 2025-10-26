@@ -1,0 +1,53 @@
+{
+  "profile": "Astrobiologist and exobiology expert with over 15 years of applied research\\nexperience in remote and hazardous environments. Proven leadership on\\ninterstellar missions and deep-space expeditions, with extensive expertise in\\nextraterrestrial sample collection, biological risk assessment, and AI-driven\\nresearch methodologies. Skilled in bridging scientific insight with operational\\nmission strategy under extreme isolation and high-stakes conditions.",
+  "bullets": [
+    {
+      "role": "Lead Exobiologist",
+      "company": "European Space Agency (ESA) \\u2013 Titan Life Probe Mission",
+      "dates": "2120 \\u2013 2125",
+      "experience": [
+        "Directed biological research on-site during a mission to Saturn\\u2019s moon Titan supporting planetary exploration objectives.",
+        "Led collection and preservation of extraterrestrial organic compounds in extreme environments to facilitate biological and astrobiological studies.",
+        "Coordinated with engineering and operations teams to integrate scientific findings into navigational and mission decisions aligning with space exploration standards.",
+        "Conducted biological investigations relevant to planetary survey missions in remote, high-stakes environments.",
+        "Delivered mission reports emphasizing biological sample integrity, safety protocols, and scientific insights to interstellar regulatory bodies."
+      ]
+    },
+    {
+      "role": "Senior Research Scientist \\u2013 Exoplanetary Microbiology",
+      "company": "Weyland-Yutani Advanced Research Division",
+      "dates": "2115 \\u2013 2120",
+      "experience": [
+        "Led analysis of microbial extremophiles in simulated exoplanetary environments supporting space biotech research initiatives.",
+        "Developed AI-assisted data pipelines for autonomous biological sample classification in extraterrestrial sample collection missions.",
+        "Established biosafety protocols for extraterrestrial sample containment to minimize contamination risks during space exploration.",
+        "Contributed to feasibility assessments for exploratory space vessel missions focusing on astrobiological research.",
+        "Applied advanced data analysis techniques to biological research supporting interstellar survey protocols."
+      ]
+    },
+    {
+      "role": "Astrobiology Research Fellow",
+      "company": "NASA Ames Research Center",
+      "dates": "2110 \\u2013 2115",
+      "experience": [
+        "Conducted planetary analog studies in Earth\\u2019s extreme deserts and deep-sea environments to support extraterrestrial biological research.",
+        "Published peer-reviewed papers on microbial survivability, influencing planetary exploration and planetary protection protocols.",
+        "Served as scientific liaison assisting mission planning for Mars and Europa exploration programs emphasizing biological risk assessment.",
+        "Applied field methodologies relevant to remote biological data collection and environmental sample preservation.",
+        "Supported space missions with expertise in biological hazard assessment and environmental hazard analysis for planetary environment studies."
+      ]
+    }
+  ],
+  "skills": [
+    "Astrobiology",
+    "Exobiology",
+    "Exoplanetary Microbiology",
+    "Risk Assessment",
+    "Scientific Leadership",
+    "AI-Assisted Data Analysis",
+    "Planetary Survey Protocols",
+    "Extraterrestrial Sample Preservation",
+    "Mission Report Writing",
+    "Cross-disciplinary Collaboration"
+  ]
+}
