@@ -146,8 +146,10 @@ def compute_similarity(
         resume_data: dict
 ) -> dict:
     
+    # Ensure that resume_data is a dictionary
+    if not isinstance(resume_data, dict):
+        raise ValueError('Resume data must be a dictionary')
 
-    
     # Get thee embeddings for each resume section
     resume_embeddings = {}
     for section, text in resume_data.items():
