@@ -139,4 +139,28 @@ def test_resume_similarity():
     )
 
     assert len(data.keys()) == 3
+
+def test_resume_similarity_no_profile():
+    """
+    Test the similarity between a resume and a job desc
+    Missing profile in dictionary
+    """
+
+    # Get resume preview data - this is the output from build_resume_preview
+    with open('data/test_data/resume_preview_file.json') as f:
+        resume_preview_data = json.load(f)
+
+    # delete profile from resume_preview_data
+    del resume_preview_data['profile']
+
+    # Get the job desc
+    with open('data/test_data/job_desc.txt','r') as f:
+        job_desc = f.read()
+
+    data = resi.resume.compute_resume_similarity(
+        job_desc=job_desc,
+        resume_preview=resume_preview_data
+    )
+
+    assert len(data.keys()) == 2
     
