@@ -143,7 +143,8 @@ def generate_job_bullets(
 
 def compute_similarity(
         job_desc: str,
-        resume_data: dict
+        resume_data: dict,
+        round_to: int
 ) -> dict:
     
     # Ensure that resume_data is a dictionary
@@ -173,6 +174,6 @@ def compute_similarity(
     # compute cosine similarity
     for section, emb in resume_tensor.items():
         similarity = F.cosine_similarity(emb, job_tensor, dim=0)
-        similarity_dict[section] = round(similarity.item(), 3)
+        similarity_dict[section] = round(similarity.item(), round_to)
 
     return similarity_dict

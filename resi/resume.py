@@ -8,6 +8,7 @@ from typing import Union
 import json
 import copy
 import os
+import statistics
 
 def build_resume_preview(
         job_desc: str,
@@ -71,12 +72,14 @@ def build_resume_preview(
 def compute_resume_similarity(
         job_desc: str,
         resume_preview: dict,
+        round_to: int = 3
     )-> dict:
     """
     Determine how similar a resume_review is to the job description
 
     :param job_desc: The job description to compare
     :param resume_preview: The resume description to compare. Must be a dictionary from build_resume_preview
+    :param round_to: Round results to a specified number of decimal places (default is 3)
     """
 
     # Merge the bullets into a single text
@@ -86,9 +89,17 @@ def compute_resume_similarity(
     # Merge skills list into a comma separated string
     resume_preview['skills'] = ', '.join(resume_preview['skills'])
 
-    data = compute_similarity(job_desc=job_desc, resume_data=resume_preview)
+    similarity_results = compute_similarity(
+        job_desc=job_desc,
+        resume_data=resume_preview,
+        round_to=round_to
+    )
 
-    return data
+    # Include the overall similarity of the keys
+    overall_similarity = statistics.mean([x for x in similarity_results.values()])
+    similarity_results['overall_similarity'] = round(overall_similarity, round_to)
+
+    return similarity_results
 
 
 def build_resume_pdf(

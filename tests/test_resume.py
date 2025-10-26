@@ -138,7 +138,7 @@ def test_resume_similarity():
         resume_preview=resume_preview_data
     )
 
-    assert len(data.keys()) == 3
+    assert len(data.keys()) == 4
 
 def test_resume_similarity_no_profile():
     """
@@ -162,5 +162,5 @@ def test_resume_similarity_no_profile():
         resume_preview=resume_preview_data
     )
 
-    assert len(data.keys()) == 2
+    assert len(data.keys()) == 3
     
