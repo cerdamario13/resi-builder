@@ -6,11 +6,11 @@
       "company": "European Space Agency (ESA) \\u2013 Titan Life Probe Mission",
       "dates": "2120 \\u2013 2125",
       "experience": [
-        "Directed biological research on-site during a mission to Saturn\\u2019s moon Titan supporting planetary exploration objectives.",
-        "Led collection and preservation of extraterrestrial organic compounds in extreme environments to facilitate biological and astrobiological studies.",
-        "Coordinated with engineering and operations teams to integrate scientific findings into navigational and mission decisions aligning with space exploration standards.",
-        "Conducted biological investigations relevant to planetary survey missions in remote, high-stakes environments.",
-        "Delivered mission reports emphasizing biological sample integrity, safety protocols, and scientific insights to interstellar regulatory bodies."
+        "Directed biological investigations during planetary surface missions to Titan, supporting extraterrestrial environmental research.",
+        "Led collection and preservation of organic compounds and microbial samples in extreme extraterrestrial conditions.",
+        "Collaborated with engineering teams to integrate scientific findings into navigation and mission operational planning.",
+        "Advised mission stakeholders on biological risks and opportunities pertinent to planetary exploration objectives.",
+        "Compiled detailed scientific reports to interstellar regulatory authorities and mission command, ensuring compliance with safety protocols."
       ]
     },
     {
@@ -18,11 +18,11 @@
       "company": "Weyland-Yutani Advanced Research Division",
       "dates": "2115 \\u2013 2120",
       "experience": [
-        "Led analysis of microbial extremophiles in simulated exoplanetary environments supporting space biotech research initiatives.",
-        "Developed AI-assisted data pipelines for autonomous biological sample classification in extraterrestrial sample collection missions.",
-        "Established biosafety protocols for extraterrestrial sample containment to minimize contamination risks during space exploration.",
-        "Contributed to feasibility assessments for exploratory space vessel missions focusing on astrobiological research.",
-        "Applied advanced data analysis techniques to biological research supporting interstellar survey protocols."
+        "Led analysis of microbial extremophiles in simulated exoplanetary environments supporting planetary survey initiatives.",
+        "Developed AI-assisted data pipelines for autonomous classification of extraterrestrial biological samples.",
+        "Established protocols for extraterrestrial sample containment to ensure protocols compliance and contamination control.",
+        "Contributed to feasibility assessments of exploratory-class vessel missions through biological research insights.",
+        "Integrated biological research findings into mission strategies for space exploration and extraterrestrial biology studies."
       ]
     },
     {
@@ -30,11 +30,11 @@
       "company": "NASA Ames Research Center",
       "dates": "2110 \\u2013 2115",
       "experience": [
-        "Conducted planetary analog studies in Earth\\u2019s extreme deserts and deep-sea environments to support extraterrestrial biological research.",
-        "Published peer-reviewed papers on microbial survivability, influencing planetary exploration and planetary protection protocols.",
-        "Served as scientific liaison assisting mission planning for Mars and Europa exploration programs emphasizing biological risk assessment.",
-        "Applied field methodologies relevant to remote biological data collection and environmental sample preservation.",
-        "Supported space missions with expertise in biological hazard assessment and environmental hazard analysis for planetary environment studies."
+        "Conducted planetary analog studies in Earth\\'s extreme environments to support extraterrestrial biological research.",
+        "Published research on microbial survivability related to vacuum and radiation, relevant to space environment hazards.",
+        "Served as scientific liaison for planetary exploration missions, emphasizing sample collection and biosafety protocols.",
+        "Supported planetary science research methodologies aligned with interstellar survey protocols.",
+        "Contributed to mission planning for Mars and Europa exploration using biological and environmental risk assessments."
       ]
     }
   ],
@@ -49,5 +49,19 @@
     "Extraterrestrial Sample Preservation",
     "Mission Report Writing",
     "Cross-disciplinary Collaboration"
+  ],
+  "education": [
+    {
+      "school": "California Institute of Technology (Caltech)",
+      "degree": "Ph.D.",
+      "field_of_study": "Astrobiology & Exobiology",
+      "location": "Pasadena, CA, USA"
+    },
+    {
+      "school": "University of Cambridge",
+      "degree": "M.Sc.",
+      "field_of_study": "Astrophysics",
+      "location": "Cambridge, UK"
+    }
   ]
 }

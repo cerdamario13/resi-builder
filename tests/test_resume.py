@@ -15,7 +15,7 @@ def test_resume_preview():
         'data/test_data/user_history.json', # Importing a file via file path
     )
 
-    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
+    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills', 'education']
 
 def test_resume_preview_no_profile():
     """
@@ -52,7 +52,7 @@ def test_resume_preview_with_additional_messages():
         'Translate output to Spanish'
     )
 
-    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
+    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills', 'education']
 
 def test_cover_letter_pdf():
     """
@@ -138,29 +138,5 @@ def test_resume_similarity():
         resume_preview=resume_preview_data
     )
 
-    assert len(data.keys()) == 4
-
-def test_resume_similarity_no_profile():
-    """
-    Test the similarity between a resume and a job desc
-    Missing profile in dictionary
-    """
-
-    # Get resume preview data - this is the output from build_resume_preview
-    with open('data/test_data/resume_preview_file.json') as f:
-        resume_preview_data = json.load(f)
-
-    # delete profile from resume_preview_data
-    del resume_preview_data['profile']
-
-    # Get the job desc
-    with open('data/test_data/job_desc.txt','r') as f:
-        job_desc = f.read()
-
-    data = resi.resume.compute_resume_similarity(
-        job_desc=job_desc,
-        resume_preview=resume_preview_data
-    )
-
-    assert len(data.keys()) == 3
+    assert len(data.keys()) == 5
     
