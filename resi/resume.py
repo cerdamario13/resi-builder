@@ -76,7 +76,7 @@ def compute_resume_similarity(
         round_to: int = 3
     )-> dict:
     """
-    Determine how similar a resume_review is to the job description
+    Determine how similar the resume is to the job description (Beta)
 
     :param job_desc: The job description to compare
     :param resume_preview: The resume description to compare. Must be a dictionary from build_resume_preview
