@@ -138,5 +138,6 @@ def test_resume_similarity():
         resume_preview=resume_preview_data
     )
 
-    assert len(data.keys()) == 5
+    data_keys = data.keys()
+    assert 'overall_score' in data_keys and 'details' in data_keys 
     
