@@ -2,6 +2,7 @@ from openai import OpenAI
 import json
 import torch
 import torch.nn.functional as F
+import re
 
 client = OpenAI()
 open_ai_model = "gpt-4.1-nano"
@@ -144,36 +145,47 @@ def generate_job_bullets(
 def compute_similarity(
         job_desc: str,
         resume_data: dict,
-        round_to: int
-) -> dict:
+        round_to: int = 3
+    ):
+
+    # Normalize and tokenize
+    job_sentences = re.split(r'(?<=[.!?])\s+', job_desc.strip())
+    job_sentences = [s for s in job_sentences if len(s) > 10]
     
-    # Ensure that resume_data is a dictionary
-    if not isinstance(resume_data, dict):
-        raise ValueError('Resume data must be a dictionary')
-
-    # Get thee embeddings for each resume section
-    resume_embeddings = {}
-    for section, text in resume_data.items():
-        response = client.embeddings.create(
-            model=embeddings_generator_model,
-            input=text
-        )
-        resume_embeddings[section] = response.data[0].embedding
-
-    # Get the embeddings from the job description
-    job_embeddings = client.embeddings.create(
-        model=embeddings_generator_model,
-        input=job_desc
-    ).data[0].embedding
-
-    # Convert to pytorch tensors
-    job_tensor = torch.tensor(job_embeddings)
-    resume_tensor = {k:torch.tensor(v) for k, v in resume_embeddings.items()}
-
-    similarity_dict = {}
-    # compute cosine similarity
-    for section, emb in resume_tensor.items():
-        similarity = F.cosine_similarity(emb, job_tensor, dim=0)
-        similarity_dict[section] = round(similarity.item(), round_to)
-
-    return similarity_dict
+    resume_texts = []
+    for key, val in resume_data.items():
+        if isinstance(val, list):
+            resume_texts.extend(val)
+        else:
+            resume_texts.append(val)
+    
+    # Embed all in batch
+    all_inputs = job_sentences + resume_texts
+    embeddings = client.embeddings.create(model=embeddings_generator_model, input=all_inputs).data
+    tensors = [torch.tensor(x.embedding) for x in embeddings]
+    
+    job_embeds = tensors[:len(job_sentences)]
+    resume_embeds = tensors[len(job_sentences):]
+    
+    # Normalize
+    job_matrix = F.normalize(torch.stack(job_embeds), dim=1)
+    resume_matrix = F.normalize(torch.stack(resume_embeds), dim=1)
+    
+    # Full cosine similarity matrix
+    sim_matrix = torch.mm(job_matrix, resume_matrix.T)
+    
+    # Compute mean of top N matches per job sentence
+    top_n = 3
+    top_scores, _ = torch.topk(sim_matrix, top_n, dim=1)
+    avg_top = torch.mean(top_scores, dim=1)
+    
+    # Aggregate
+    overall_score = torch.mean(avg_top).item()
+    
+    return {
+        "overall_score": round(overall_score, round_to),
+        "details": [
+            {"job_sentence": job_sentences[i], "avg_top_n": round(avg_top[i].item(), round_to)}
+            for i in range(len(job_sentences))
+        ]
+    }

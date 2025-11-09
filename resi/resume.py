@@ -91,14 +91,14 @@ def compute_resume_similarity(
     resume_preview['skills'] = ', '.join(resume_preview['skills'])
 
     # Merge education into a comma separated string
-    education_string = ""
+    education_list = []
     for idx, edu in enumerate(resume_preview['education']):
         temp_edu = ""
         for key, value in edu.items():
             temp_edu += f"{key}: {value} "
-        education_string += f"Education {idx + 1}: {temp_edu}"
+        education_list.append(temp_edu.strip())
 
-    resume_preview['education'] = education_string.strip()
+    resume_preview['education'] = education_list
 
 
     similarity_results = compute_similarity(
@@ -106,16 +106,6 @@ def compute_resume_similarity(
         resume_data=resume_preview,
         round_to=round_to
     )
-
-    # Include the overall similarity of the keys
-    # Use a weighted score: experience (bullets) > skills > education > summary(profile)
-    overall_similarity = (
-        0.4 * similarity_results['bullets'] +
-        0.3 * similarity_results['skills'] +
-        0.2 * similarity_results['education'] +
-        0.1 * similarity_results['profile']
-    )
-    similarity_results['overall_similarity'] = round(overall_similarity, round_to)
 
     return similarity_results
 
