@@ -45,12 +45,16 @@ def get_styles():
 def add_section(story, title, styles, content=None, bullets=None, spacer_height=1):
     story.append(Paragraph(f"<b>{title}</b>", styles['Header']))
     if content:
-        story.append(Paragraph(content, styles['CustomBodyText']))
+        story.append(Paragraph(content, styles['CustomBullet']))
     if bullets:
         for bullet in bullets:
             story.append(Paragraph(f"• {bullet}", styles['CustomBullet']))
     story.append(Spacer(1, spacer_height))
 
+
+def add_education_section(story, title, styles, spacer_height=1):
+    story.append(Paragraph(f"{title}", styles['CustomBodyText']))
+    story.append(Spacer(1, spacer_height))
 
 def add_name_header(story, styles, content):
     story.append(Paragraph(content, styles['NameHeading']))
