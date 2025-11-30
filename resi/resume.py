@@ -118,6 +118,7 @@ def build_resume_pdf(
         )
 
     # Education
+    pdf_utils.add_section(Story, "Education", styles)
     for education in user_history['education']:
             pdf_utils.add_section(story=Story, title=f"{education['degree'].upper()} IN {education['field_of_study'].upper()} | {education['school'].upper()}, {education['location'].upper()}", styles=styles)
 
