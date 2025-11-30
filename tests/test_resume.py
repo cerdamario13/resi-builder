@@ -54,9 +54,9 @@ def test_resume_preview_with_additional_messages():
 
     assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
 
-def test_cover_letter_pdf():
+def test_resume_pdf():
     """
-    Test the generation of the pdf file
+    Test the generation of resume pdf file
     """
 
     # resume data mock
