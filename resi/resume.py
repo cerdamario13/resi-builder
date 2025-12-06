@@ -64,6 +64,7 @@ def build_resume_preview(
         'profile': wrapped_profile,
         'bullets': bullets,
         'skills': skills,
+        'education': user_history_copy['education']
     }
 
     return body

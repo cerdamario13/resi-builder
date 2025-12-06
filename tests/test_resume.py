@@ -15,7 +15,7 @@ def test_resume_preview():
         'data/test_data/user_history.json', # Importing a file via file path
     )
 
-    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
+    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills', 'education']
 
 def test_resume_preview_no_profile():
     """
@@ -52,7 +52,7 @@ def test_resume_preview_with_additional_messages():
         'Translate output to Spanish'
     )
 
-    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills']
+    assert list(resume_data.keys()) == ['profile', 'bullets', 'skills', 'education']
 
 def test_resume_pdf():
     """
