@@ -1,2 +1,3 @@
 reportlab
 openai
+python-docx
