@@ -2,12 +2,13 @@ from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle
 from reportlab.lib import colors
 from .open_ai_writer import generate_job_bullets, generate_profile
-from .utils import pdf_utils
+from .utils import pdf_utils, word_utils
 import textwrap
 from typing import Union
 import json
 import copy
 import os
+from docx import Document, shared
 
 def build_resume_preview(
         job_desc: str,
@@ -159,4 +160,91 @@ def build_resume_pdf(
 
     # Build PDF
     doc.build(Story)
+    print(f"Resume generated: {file_name}")
+
+
+def build_resume_word(
+        resume_data: dict,
+        user_history: Union[str, dict],
+        file_name: str = "resume.docx"
+) -> None:
+    """
+    Build the resume as an MS Word file
+
+    :param resume_data: Dictionary containing resume data
+    :param user_history: Either a dictionary of the user's resume work history,
+                         or a path to a JSON file containing that dictionary.
+    :param file_name: (Optional) file name of the output. Can include a path.
+    :return: DOCX resume file
+    """
+
+    # Normalize input: if user_history is a str, load JSON file
+    if isinstance(user_history, str):
+        with open(user_history, "r") as f:
+            user_history = json.load(f)
+
+    # Ensure .docx extension
+    base, ext = os.path.splitext(file_name)
+    if ext.lower() != '.docx':
+        file_name = f"{base}.docx"
+
+    # Create document
+    doc = Document()
+
+    # Adjust the margins
+    section = doc.sections[0]
+    section.left_margin = shared.Inches(0.5)
+    section.right_margin = shared.Inches(0.5)
+    section.top_margin = shared.Inches(0.5)
+    section.bottom_margin = shared.Inches(0.5)
+
+    # Load styles
+    # styles = word_utils.get_styles(doc)
+
+    # Name Header
+    word_utils.add_name_header(doc, user_history['contact_info']['name'])
+
+    # Info Bar
+    contact_values = [x for x in user_history['contact_info'].values()]
+    word_utils.add_info_bar(doc, contact_values)
+
+    # Profile
+    word_utils.add_section_header(doc, "Profile")
+    word_utils.add_paragraph(doc, resume_data['profile'])
+
+    # Experience section
+    word_utils.add_section_header(doc, "Experience")
+    for exp in resume_data['bullets']:
+        title = f"{exp['role'].upper()} | {exp['company'].upper()} | {exp['dates'].upper()}"
+        word_utils.add_subheader(doc, title)
+
+        for bullet in exp['experience']:
+            word_utils.add_bullet(doc, bullet)
+
+    # Education section
+    word_utils.add_section_header(doc, "Education")
+    for edu in user_history['education']:
+        title = f"{edu['degree'].upper()} IN {edu['field_of_study'].upper()} | {edu['school'].upper()}, {edu['location'].upper()}"
+        word_utils.add_education_line(doc, title)
+
+    # Skills
+    word_utils.add_section_header(doc, "Skills & Abilities")
+
+    # Make skills even count
+    skills = resume_data['skills']
+    if len(skills) % 2 != 0:
+        skills.append("")
+
+    half = len(skills) // 2
+    left_col = skills[:half]
+    right_col = skills[half:]
+
+    word_utils.add_two_column_table(doc, left_col, right_col)
+
+    # Activities
+    word_utils.add_section_header(doc, "Activities and Interests")
+    word_utils.add_paragraph(doc, user_history["activities_and_interests"])
+
+    # Save file
+    doc.save(file_name)
     print(f"Resume generated: {file_name}")
