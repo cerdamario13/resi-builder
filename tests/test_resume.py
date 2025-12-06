@@ -65,8 +65,8 @@ def test_resume_pdf():
         "bullets": [
             {
                 "role": "Lead Exobiologist",
-                "company": "European Space Agency (ESA) \\u2013 Titan Life Probe Mission",
-                "dates": "2120 \\u2013 2125",
+                "company": "European Space Agency (ESA) - Titan Life Probe Mission",
+                "dates": "2120 - 2125",
                 "experience": ["Directed biological research during a four-year mission to Saturn\'s moon Titan supporting planetary survey objectives.",
                     "Led the collection and preservation of extraterrestrial organic compounds under extreme environmental conditions.",
                     "Collaborated with engineering and operations teams to integrate scientific findings into mission decision-making processes.",
@@ -75,9 +75,9 @@ def test_resume_pdf():
                 ]
             },
             {
-                "role": "Senior Research Scientist \\u2013 Exoplanetary Microbiology",
+                "role": "Senior Research Scientist - Exoplanetary Microbiology",
                 "company": "Weyland-Yutani Advanced Research Division",
-                "dates": "2115 \\u2013 2120",
+                "dates": "2115 - 2120",
                 "experience": [
                     "Led a team analyzing microbial extremophiles in simulated exoplanetary environments to assess habitability for planetary surveys.",
                     "Developed AI-assisted data pipelines for autonomous classification of extraterrestrial biological samples.",
@@ -89,7 +89,7 @@ def test_resume_pdf():
             {
                 "role": "Astrobiology Research Fellow",
                 "company": "NASA Ames Research Center",
-                "dates": "2110 \\u2013 2115",
+                "dates": "2110 - 2115",
                 "experience": ["Conducted planetary analog research in Earth\'s extreme desert and deep-sea environments simulating extraterrestrial conditions.",
                     "Authored peer-reviewed publications on microbial survivability in vacuum and radiation environments relevant to space missions.",
                     "Served as scientific liaison for Mars and Europa exploration planning, integrating biological studies into mission concepts.",
@@ -130,8 +130,8 @@ def test_resume_word():
         "bullets": [
             {
                 "role": "Lead Exobiologist",
-                "company": "European Space Agency (ESA) \\u2013 Titan Life Probe Mission",
-                "dates": "2120 \\u2013 2125",
+                "company": "European Space Agency (ESA) - Titan Life Probe Mission",
+                "dates": "2120 - 2125",
                 "experience": ["Directed biological research during a four-year mission to Saturn\'s moon Titan supporting planetary survey objectives.",
                     "Led the collection and preservation of extraterrestrial organic compounds under extreme environmental conditions.",
                     "Collaborated with engineering and operations teams to integrate scientific findings into mission decision-making processes.",
@@ -140,9 +140,9 @@ def test_resume_word():
                 ]
             },
             {
-                "role": "Senior Research Scientist \\u2013 Exoplanetary Microbiology",
+                "role": "Senior Research Scientist - Exoplanetary Microbiology",
                 "company": "Weyland-Yutani Advanced Research Division",
-                "dates": "2115 \\u2013 2120",
+                "dates": "2115 - 2120",
                 "experience": [
                     "Led a team analyzing microbial extremophiles in simulated exoplanetary environments to assess habitability for planetary surveys.",
                     "Developed AI-assisted data pipelines for autonomous classification of extraterrestrial biological samples.",
@@ -154,7 +154,7 @@ def test_resume_word():
             {
                 "role": "Astrobiology Research Fellow",
                 "company": "NASA Ames Research Center",
-                "dates": "2110 \\u2013 2115",
+                "dates": "2110 - 2115",
                 "experience": ["Conducted planetary analog research in Earth\'s extreme desert and deep-sea environments simulating extraterrestrial conditions.",
                     "Authored peer-reviewed publications on microbial survivability in vacuum and radiation environments relevant to space missions.",
                     "Served as scientific liaison for Mars and Europa exploration planning, integrating biological studies into mission concepts.",
