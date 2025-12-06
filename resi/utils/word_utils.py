@@ -43,7 +43,6 @@ def add_subheader(doc: Document, title: str):
     run.bold = True
     
 
-
 def add_paragraph(doc: Document, text: str):
     p = doc.add_paragraph(text)
     p.paragraph_format.left_indent = Default_indent
@@ -63,7 +62,7 @@ def add_education_line(doc: Document, text: str):
 
 def add_two_column_table(doc: Document, left_items: list[str], right_items: list[str]):
     """
-    Creates a 2-column table for skills.
+    Creates a 2-column table for skills, with indentation aligned to other content.
     """
     table = doc.add_table(rows=len(left_items), cols=2)
 
@@ -71,5 +70,13 @@ def add_two_column_table(doc: Document, left_items: list[str], right_items: list
         left_cell = table.cell(i, 0)
         right_cell = table.cell(i, 1)
 
+        # Set cell text
         left_cell.text = f"• {left}" if left else ""
         right_cell.text = f"• {right}" if right else ""
+
+        # Apply indent to EACH cell's paragraph (cells default to 1 paragraph)
+        for paragraph in left_cell.paragraphs:
+            paragraph.paragraph_format.left_indent = Default_indent
+
+        for paragraph in right_cell.paragraphs:
+            paragraph.paragraph_format.left_indent = Default_indent
