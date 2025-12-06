@@ -198,9 +198,6 @@ def build_resume_word(
     section.top_margin = shared.Inches(0.5)
     section.bottom_margin = shared.Inches(0.5)
 
-    # Load styles
-    # styles = word_utils.get_styles(doc)
-
     # Name Header
     word_utils.add_name_header(doc, user_history['contact_info']['name'])
 
