@@ -67,6 +67,10 @@ If `profile` is not provided, resi-builder will build one from the user_history 
 
 In order to make a preview resume use the following
 
+### Available Writers
+- PDF
+- Word
+
 
 ```python
 import resi
