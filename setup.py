@@ -1,8 +1,5 @@
 from setuptools import setup, find_packages
 
-# Get the contents of the requirements file
-with open('requirements.txt') as f:
-    requirements = f.readlines()
 
 setup(
     name="resi-builder",
@@ -15,5 +12,9 @@ setup(
     packages=find_packages(include=["resi", "resi.*"]),
     python_requires=">=3.10",
     url='https://github.com/cerdamario13/resi-builder',
-    install_requires = requirements,
+    install_requires = [
+        "reportlab",
+        "openai",
+        "python-docx",
+    ],
 )
