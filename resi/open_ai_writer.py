@@ -1,8 +1,16 @@
 from openai import OpenAI
 import json
+import os
 
-client = OpenAI()
+_client = None
 open_ai_model = "gpt-4.1-nano"
+
+# Lazy import client
+def get_client():
+    global _client # ensures that client is set globally 
+    if _client is None:
+        _client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+    return _client # once key is initialized, it remains therefore it does not do another initialization
 
 def cover_letter_generator(
         job_desc: str,
@@ -14,6 +22,7 @@ def cover_letter_generator(
     if job_desc == None or job_desc.strip() == '':
         raise ValueError('Job description cannot be empty')
 
+    client = get_client()
     response = client.chat.completions.create(
         model=open_ai_model,
         messages=[
@@ -58,6 +67,7 @@ def generate_profile(
     if history == None:
         raise ValueError('Job History cannot be empty')
     
+    client = get_client()
     response = client.chat.completions.create(
         model=open_ai_model,
         messages=[
@@ -90,6 +100,7 @@ def generate_job_bullets(
     if job_desc == None or job_desc.strip() == '':
         raise ValueError('Job description cannot be empty')
 
+    client = get_client()
     response = client.chat.completions.create(
         model=open_ai_model,
         messages=[
