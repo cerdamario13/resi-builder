@@ -59,7 +59,7 @@ def build_cover_letter_pdf(
         cover_letter_data: dict,
         user_history: Union[str, dict],
         file_name: str = 'cover_letter.pdf'
-    ) -> None:
+    ) -> str:
     """
     Build the cover letter as a pdf file.
 
@@ -67,7 +67,7 @@ def build_cover_letter_pdf(
     :param user_history: Either a dictionary of the user's resume work history.
                          or a path to a JSON file containing that dictionary.
     :param file_name: (Optional) file name of the output. This can be a path to the output
-    :return: PDF cover letter file
+    :return: file path
     """
 
     # Normalize input: if user_history is a str, load JSON file
@@ -107,13 +107,14 @@ def build_cover_letter_pdf(
 
     doc.build(Story)
     print(f"Cover letter generated: {file_name}")
+    return file_name
 
     
 def build_cover_letter_word(
         cover_letter_data: dict,
         user_history: Union[str, dict],
         file_name: str = 'cover_letter.docx'
-) -> None:
+) -> str:
     """
     Build the cover letter as an MS Word file.
 
@@ -121,7 +122,7 @@ def build_cover_letter_word(
     :param user_history: Either a dictionary of the user's resume work history.
                          or a path to a JSON file containing that dictionary.
     :param file_name: (Optional) file name of the output. This can be a path to the output
-    :return: Word cover letter file
+    :return: file name
     """
 
     # Normalize input: if user_history is a str, load JSON file
@@ -167,4 +168,5 @@ def build_cover_letter_word(
     # Save file
     doc.save(file_name)
     print(f"Cover Letter generated: {file_name}")
+    return file_name
     
