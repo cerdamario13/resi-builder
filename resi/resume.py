@@ -74,7 +74,7 @@ def build_resume_pdf(
         resume_data: dict,
         user_history: Union[str, dict],
         file_name: str = 'resume.pdf'
-    ) -> None:
+    ) -> str:
     """
     Build the resume as a pdf file
 
@@ -82,7 +82,7 @@ def build_resume_pdf(
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
     :param file_name: (Optional) file name of the output. This can be a path to the output
-    :return: PDF resume file
+    :return: file path
     """
 
     # Normalize input: if user_history is a str, load JSON file
@@ -161,13 +161,14 @@ def build_resume_pdf(
     # Build PDF
     doc.build(Story)
     print(f"Resume generated: {file_name}")
+    return file_name
 
 
 def build_resume_word(
         resume_data: dict,
         user_history: Union[str, dict],
         file_name: str = "resume.docx"
-) -> None:
+) -> str:
     """
     Build the resume as an MS Word file
 
@@ -175,7 +176,7 @@ def build_resume_word(
     :param user_history: Either a dictionary of the user's resume work history,
                          or a path to a JSON file containing that dictionary.
     :param file_name: (Optional) file name of the output. Can include a path.
-    :return: DOCX resume file
+    :return: file path
     """
 
     # Normalize input: if user_history is a str, load JSON file
@@ -245,3 +246,4 @@ def build_resume_word(
     # Save file
     doc.save(file_name)
     print(f"Resume generated: {file_name}")
+    return file_name
