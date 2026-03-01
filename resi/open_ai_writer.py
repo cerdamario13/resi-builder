@@ -119,7 +119,7 @@ def generate_job_bullets(
             {job_desc}
 
             User work history:
-            {history}
+            {history['history']}
 
             Return a JSON array where each element is an object with the following fields:
             - "role": job title
@@ -135,10 +135,11 @@ def generate_job_bullets(
                 "dates": "Year-Year",
                 "experience": [
                 "Tailored bullet point 1",
+                "Tailored bullet point 2,
                 ...
                 ]
             }},
-            ... continue with the rest of the jobs using the same format
+            ... continue with the rest of the jobs using the same format. Be sure to include all of the user work histories
             ]
 
             Also take in any additional instructions from the user if any:
