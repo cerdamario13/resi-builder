@@ -124,7 +124,7 @@ def build_resume_pdf(
     for education in user_history['education']:
             pdf_utils.add_education_section(
                 story=Story,
-                title=f"{education['degree'].upper()} IN {education['field_of_study'].upper()} | {education['school'].upper()}, {education['location'].upper()}",
+                title=f"{education['degree'].upper()} in {education['field_of_study'].title()} | {education['school'].title()}, {education['location'].title()}",
                 styles=styles,
                 spacer_height=5
             )
