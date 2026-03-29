@@ -124,7 +124,7 @@ def build_resume_pdf(
     for education in user_history['education']:
             pdf_utils.add_education_section(
                 story=Story,
-                title=f"{education['degree'].upper()} IN {education['field_of_study'].upper()} | {education['school'].upper()}, {education['location'].upper()}",
+                title=f"{education['degree'].upper()} in {education['field_of_study'].title()} | {education['school'].title()}, {education['location'].title()}",
                 styles=styles,
                 spacer_height=5
             )
@@ -222,8 +222,8 @@ def build_resume_word(
     # Education section
     word_utils.add_section_header(doc, "Education")
     for edu in user_history['education']:
-        title = f"{edu['degree'].upper()} IN {edu['field_of_study'].upper()} | {edu['school'].upper()}, {edu['location'].upper()}"
-        word_utils.add_education_line(doc, title)
+        title = f"{edu['degree'].upper()} IN {edu['field_of_study'].title()} | {edu['school'].title()}, {edu['location'].title()}"
+        word_utils.add_bullet(doc, title)
 
     # Skills
     word_utils.add_section_header(doc, "Skills & Abilities")
