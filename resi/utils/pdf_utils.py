@@ -53,7 +53,7 @@ def add_section(story, title, styles, content=None, bullets=None, spacer_height=
 
 
 def add_education_section(story, title, styles, spacer_height=1):
-    story.append(Paragraph(f"{title}", styles['CustomBodyText']))
+    story.append(Paragraph(f"• {title}", styles['CustomBullet']))
     story.append(Spacer(1, spacer_height))
 
 def add_name_header(story, styles, content):
