@@ -222,7 +222,7 @@ def build_resume_word(
     # Education section
     word_utils.add_section_header(doc, "Education")
     for edu in user_history['education']:
-        title = f"{edu['degree'].upper()} IN {edu['field_of_study'].upper()} | {edu['school'].upper()}, {edu['location'].upper()}"
+        title = f"{edu['degree'].upper()} IN {edu['field_of_study'].title()} | {edu['school'].title()}, {edu['location'].title()}"
         word_utils.add_education_line(doc, title)
 
     # Skills
